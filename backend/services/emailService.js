@@ -14,7 +14,13 @@ const enviarCorreo = async ({ to, subject, html }) => {
         });
 
         console.log('✅ Correo enviado correctamente');
-        console.log('ID:', result.id); // 👈 AQUÍ ESTÁ EL FIX
+
+        // 👇 LOG SEGURO (estructura real de Resend)
+        console.log('RESULT COMPLETO:', JSON.stringify(result, null, 2));
+
+        const emailId = result?.data?.id;
+
+        console.log('ID:', emailId || 'NO ID RETURNED');
 
         return true;
 
