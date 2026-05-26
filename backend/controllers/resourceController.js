@@ -53,8 +53,10 @@ const crearRecurso = async (req, res) => {
     }
 
     // 🔥 SUBIR A CLOUDINARY
-    const result = await uploadToCloudinary(archivo.buffer, 'recursos');
-
+    const result = await uploadToCloudinary(
+      archivo.buffer,
+      archivo.mimetype
+    );
     const archivo_url = result.secure_url;
 
     // 🔥 GUARDAR EN DB
