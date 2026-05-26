@@ -1,0 +1,39 @@
+{
+  "name": "red-cooperacion-ia",
+  "version": "1.0.0",
+  "description": "Proyecto fullstack Red Cooperación IA",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "frontend": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+  "axios": "^1.15.2",
+  "bcrypt": "^6.0.0",
+  "body-parser": "^1.20.3",
+  "cloudinary": "^2.10.0",
+  "cors": "^2.8.5",
+  "dotenv": "^17.4.2",
+  "express": "^4.18.2",
+  "jsonwebtoken": "^9.0.2",
+  "lucide-react": "^1.16.0",
+  "multer": "^2.1.1",
+  "mysql2": "^3.6.0",
+  "nodemailer": "^8.0.8",
+  "react": "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-hot-toast": "^2.6.0",
+  "react-router-dom": "^6.14.1"
+},
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "nodemon": "^3.0.1",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.4",
+    "vite": "^5.4.1"
+  }
+}

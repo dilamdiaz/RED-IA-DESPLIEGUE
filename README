@@ -1,0 +1,50 @@
+CONTRASEÑA DE SEGURIDAD: contraTest1234
+
+
+BASE DE DATOS
+
+    1. Abrir XAMPP
+    2. Encender Apache y MySQL
+
+
+
+BACKEND
+    CORRER SERVIDOR BACKEND
+
+        1. Abrir terminal
+            Ctrl + shift + ñ
+
+        2. Pegar los siguientes comandos uno por uno
+
+            cd backend
+            npx nodemon app.js
+
+    RESULTADO:
+        [nodemon] 3.1.14
+        [nodemon] to restart at any time, enter `rs`
+        [nodemon] watching path(s): *.*
+        [nodemon] watching extensions: js,mjs,cjs,json
+        [nodemon] starting `node app.js`
+        Conexión a la base de datos MySQL establecida.
+        Servidor iniciado en http://localhost:3001
+
+
+FRONTEND
+    CORRER SERVIDOR FRONEND
+        1. Abrir terminal
+            Ctrl + shift + ñ
+
+        2. Pegar los siguientes comandos uno por uno
+
+            cd frontend
+            npm run dev
+        3. abrir http://localhost:5173/
+
+        
+    RESULTADO: 
+        
+        VITE v5.4.21  ready in 369 ms
+
+        ➜  Local:   http://localhost:5173/
+        ➜  Network: use --host to expose
+        ➜  press h + enter to show help

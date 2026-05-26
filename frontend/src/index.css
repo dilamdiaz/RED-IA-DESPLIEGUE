@@ -1,0 +1,32 @@
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif,
+    "Segoe UI Emoji",
+    "Apple Color Emoji",
+    "Noto Color Emoji";
+
+  background-color: #f1f5f9;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+button {
+  font: inherit;
+}
