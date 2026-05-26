@@ -25,37 +25,34 @@ const ResourcePreview = ({ recurso }) => {
   console.log('📎 Extensión:', extension);
 
   // =========================
-  // 📄 PDF
-  // =========================
-  if (tipo.includes('pdf') || extension === 'pdf') {
+// 📄 PDF
+// =========================
+if (tipo.includes('pdf') || extension === 'pdf') {
 
-    console.log('📄 Renderizando PDF');
+  console.log('📄 Renderizando PDF');
 
-    // 🔥 FIX CLOUDINARY PDF INLINE
-    const previewUrl = url.replace(
-      '/upload/',
-      '/upload/fl_inline/'
-    );
+  const googleViewerUrl =
+    `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
 
-    console.log('🪄 Preview URL:', previewUrl);
+  console.log('🪄 Google Viewer URL:', googleViewerUrl);
 
-    return (
-      <iframe
-        src={previewUrl}
-        className="
-          h-full
-          w-full
-          rounded-xl
-          border
-          border-white/20
-          bg-white
-        "
-        title="pdf-preview"
-        onLoad={() => console.log('✅ PDF cargado')}
-        onError={() => console.log('❌ Error PDF')}
-      />
-    );
-  }
+  return (
+    <iframe
+      src={googleViewerUrl}
+      className="
+        h-full
+        w-full
+        rounded-xl
+        border
+        border-white/20
+        bg-white
+      "
+      title="pdf-preview"
+      onLoad={() => console.log('✅ PDF cargado')}
+      onError={() => console.log('❌ Error PDF')}
+    />
+  );
+}
 
   // =========================
   // 🖼️ IMAGEN
