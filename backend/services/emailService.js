@@ -1,5 +1,3 @@
-// services/emailService.js
-
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -8,12 +6,15 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+
+    connectionTimeout: 10000
 });
 
 // ======================================
 // 📧 ENVIAR CORREO
 // ======================================
+
 const enviarCorreo = async ({
     to,
     subject,
@@ -31,16 +32,18 @@ const enviarCorreo = async ({
 
         console.log(`✅ Correo enviado a ${to}`);
 
+        return true;
+
     } catch (error) {
 
         console.log('❌ Error enviando correo');
-
         console.log(error);
 
-        throw error;
+        return false;
     }
 };
 
 module.exports = {
-    enviarCorreo
+    enviarCorreo,
+    transporter
 };
