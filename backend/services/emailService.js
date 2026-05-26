@@ -1,13 +1,11 @@
-const nodemailer = require('nodemailer');
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
 
-// ======================================
-// 📧 CONFIGURACIÓN SMTP GMAIL
-// ======================================
+const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
 
-    // IP IPv4 de Gmail SMTP
-    host: '74.125.133.108',
+    host: 'smtp.gmail.com',
 
     port: 587,
 
@@ -19,22 +17,13 @@ const transporter = nodemailer.createTransport({
     },
 
     tls: {
-        rejectUnauthorized: false,
-
-        // importante para Gmail
-        servername: 'smtp.gmail.com'
+        rejectUnauthorized: false
     },
 
-    connectionTimeout: 10000,
-
-    greetingTimeout: 10000,
-
-    socketTimeout: 10000
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 15000
 });
-
-// ======================================
-// ✅ VERIFICAR SMTP
-// ======================================
 
 transporter.verify((error, success) => {
 
@@ -48,7 +37,6 @@ transporter.verify((error, success) => {
         console.log('✅ SMTP READY');
     }
 });
-
 // ======================================
 // 📧 ENVIAR CORREO
 // ======================================
