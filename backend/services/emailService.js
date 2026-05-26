@@ -1,14 +1,13 @@
-// services/emailService.js
-
 const nodemailer = require('nodemailer');
 
 // ======================================
-// 📧 CONFIGURACIÓN SMTP
+// 📧 CONFIGURACIÓN SMTP GMAIL
 // ======================================
 
 const transporter = nodemailer.createTransport({
 
-    host: 'smtp.gmail.com',
+    // IP IPv4 de Gmail SMTP
+    host: '74.125.133.108',
 
     port: 587,
 
@@ -20,18 +19,21 @@ const transporter = nodemailer.createTransport({
     },
 
     tls: {
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
+
+        // importante para Gmail
+        servername: 'smtp.gmail.com'
     },
 
-    // Forzar IPv4 para evitar errores ENETUNREACH en Render
-    family: 4,
+    connectionTimeout: 10000,
 
-    // Tiempo máximo de espera
-    connectionTimeout: 10000
+    greetingTimeout: 10000,
+
+    socketTimeout: 10000
 });
 
 // ======================================
-// ✅ VERIFICAR CONEXIÓN SMTP
+// ✅ VERIFICAR SMTP
 // ======================================
 
 transporter.verify((error, success) => {
