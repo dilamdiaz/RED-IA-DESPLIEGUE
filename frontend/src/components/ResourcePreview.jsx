@@ -1,17 +1,19 @@
 // ResourcePreview.jsx
 
 const ResourcePreview = ({ recurso }) => {
+
   if (!recurso) return null;
 
-  const url = recurso.archivo_url
-    ? `${import.meta.env.VITE_API_URL}${recurso.archivo_url}`
-    : '';
+  const url = recurso.archivo_url || '';
 
-  // 🔥 NORMALIZACIÓN
-  const tipo = (recurso.tipo || '').toLowerCase().trim();
+  const tipo = (recurso.tipo || '')
+    .toLowerCase()
+    .trim();
 
-  // 🔥 DETECCIÓN POR EXTENSIÓN (PLAN B)
-  const extension = url.split('.').pop()?.toLowerCase();
+  const extension = url
+    .split('.')
+    .pop()
+    ?.toLowerCase();
 
   if (!url) return null;
 
