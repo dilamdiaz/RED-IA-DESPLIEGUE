@@ -2,10 +2,6 @@ const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ======================================
-// 📧 ENVIAR CORREO
-// ======================================
-
 const enviarCorreo = async ({ to, subject, html }) => {
 
     try {
@@ -18,7 +14,7 @@ const enviarCorreo = async ({ to, subject, html }) => {
         });
 
         console.log('✅ Correo enviado correctamente');
-        console.log('ID:', result.data?.id);
+        console.log('ID:', result.id); // 👈 AQUÍ ESTÁ EL FIX
 
         return true;
 
