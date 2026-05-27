@@ -27,33 +27,62 @@ const ResourcePreview = ({ recurso }) => {
   // =========================
   // 📄 PDF
   // =========================
+  // =========================
+  // 📄 PDF
+  // =========================
   if (tipo.includes('pdf') || extension === 'pdf') {
 
-    console.log('📄 Renderizando PDF');
-
-    // 🔥 FORCE INLINE PDF
-    const previewUrl = url.replace(
-      '/upload/',
-      '/upload/fl_attachment:false/'
-    );
-
-    console.log('🪄 Preview URL:', previewUrl);
+    console.log('📄 PDF detectado');
 
     return (
-      <iframe
-        src={previewUrl}
-        className="
-        h-full
-        w-full
-        rounded-xl
-        border
-        border-white/20
-        bg-white
-      "
-        title="pdf-preview"
-        onLoad={() => console.log('✅ PDF cargado')}
-        onError={() => console.log('❌ Error PDF')}
-      />
+
+      <div className="flex flex-col items-center justify-center gap-5 text-white">
+
+        <div
+          className="
+          flex
+          h-28
+          w-28
+          items-center
+          justify-center
+          rounded-3xl
+          border
+          border-red-500/20
+          bg-red-500/10
+          text-6xl
+        "
+        >
+          📄
+        </div>
+
+        <div className="text-center">
+
+          <h3 className="text-xl font-semibold">
+            Documento PDF
+          </h3>
+
+          <p className="mt-2 text-sm text-white/60">
+            Este archivo se abrirá en una nueva pestaña
+          </p>
+
+        </div>
+
+        <button
+          onClick={() => window.open(url, '_blank')}
+          className="
+          rounded-2xl
+          bg-cyan-500/20
+          px-6
+          py-3
+          text-cyan-300
+          transition
+          hover:bg-cyan-500/30
+        "
+        >
+          📖 Abrir PDF
+        </button>
+
+      </div>
     );
   }
   // =========================
