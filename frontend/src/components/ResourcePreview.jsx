@@ -62,7 +62,7 @@ const ResourcePreview = ({ recurso }) => {
           </h3>
 
           <p className="mt-2 text-sm text-white/60">
-            Este archivo se abrirá en una nueva pestaña
+            Este archivo se descargara automaticamente al hacer clic en el botón. Asegúrate de tener un lector de PDF instalado para abrirlo.
           </p>
 
         </div>
