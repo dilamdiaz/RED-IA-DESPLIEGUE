@@ -24,14 +24,22 @@ const uploadToCloudinary = async (fileBuffer, mimetype) => {
     cloudinary.uploader.upload_stream(
       {
         resource_type: resourceType,
+
+        type: 'upload',
+
+        access_mode: 'public',
       },
+
       (error, result) => {
 
-        if (error) return reject(error);
+        if (error) {
+          return reject(error);
+        }
 
         resolve(result);
 
       }
+
     ).end(fileBuffer);
 
   });

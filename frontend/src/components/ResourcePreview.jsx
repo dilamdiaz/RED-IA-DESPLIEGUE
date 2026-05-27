@@ -25,21 +25,16 @@ const ResourcePreview = ({ recurso }) => {
   console.log('📎 Extensión:', extension);
 
   // =========================
-// 📄 PDF
-// =========================
-if (tipo.includes('pdf') || extension === 'pdf') {
+  // 📄 PDF
+  // =========================
+  if (tipo.includes('pdf') || extension === 'pdf') {
 
-  console.log('📄 Renderizando PDF');
+    console.log('📄 Renderizando PDF');
 
-  const googleViewerUrl =
-    `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
-
-  console.log('🪄 Google Viewer URL:', googleViewerUrl);
-
-  return (
-    <iframe
-      src={googleViewerUrl}
-      className="
+    return (
+      <iframe
+        src={url}
+        className="
         h-full
         w-full
         rounded-xl
@@ -47,13 +42,12 @@ if (tipo.includes('pdf') || extension === 'pdf') {
         border-white/20
         bg-white
       "
-      title="pdf-preview"
-      onLoad={() => console.log('✅ PDF cargado')}
-      onError={() => console.log('❌ Error PDF')}
-    />
-  );
-}
-
+        title="pdf-preview"
+        onLoad={() => console.log('✅ PDF cargado')}
+        onError={() => console.log('❌ Error PDF')}
+      />
+    );
+  }
   // =========================
   // 🖼️ IMAGEN
   // =========================
