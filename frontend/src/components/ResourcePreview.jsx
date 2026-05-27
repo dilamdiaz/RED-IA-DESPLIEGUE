@@ -31,16 +31,28 @@ const ResourcePreview = ({ recurso }) => {
 
     console.log('📄 Renderizando PDF');
 
+    // 🔥 FORCE INLINE PDF
+    const previewUrl = url.replace(
+      '/upload/',
+      '/upload/fl_attachment:false/'
+    );
+
+    console.log('🪄 Preview URL:', previewUrl);
+
     return (
-      <embed
-        src={url}
-        type="application/pdf"
+      <iframe
+        src={previewUrl}
         className="
         h-full
         w-full
         rounded-xl
+        border
+        border-white/20
         bg-white
       "
+        title="pdf-preview"
+        onLoad={() => console.log('✅ PDF cargado')}
+        onError={() => console.log('❌ Error PDF')}
       />
     );
   }
