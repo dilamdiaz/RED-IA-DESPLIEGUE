@@ -2,29 +2,52 @@ const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const enviarCorreo = async ({ to, subject, html }) => {
+// ======================================
+// 📧 ENVIAR CORREO
+// ======================================
+
+const enviarCorreo = async ({
+    to,
+    subject,
+    html
+}) => {
 
     try {
 
         const result = await resend.emails.send({
-            from: "Red IA <noreply@mail.redia.com>",
+
+            from: process.env.EMAIL_FROM,
+
             to,
+
             subject,
+
             html
         });
 
-        console.log("✅ Correo enviado");
-        console.log("ID:", result?.data?.id);
+        // 🚨 RESEND devuelve data/error
+        if (result.error) {
+
+            console.log('❌ Error enviando correo');
+            console.log(result.error);
+
+            return false;
+        }
+
+        console.log('✅ Correo enviado correctamente');
+        console.log('ID:', result.data?.id);
 
         return true;
 
     } catch (error) {
 
-        console.log("❌ Error enviando correo");
+        console.log('❌ Error enviando correo');
         console.log(error);
 
         return false;
     }
 };
 
-module.exports = { enviarCorreo };
+module.exports = {
+    enviarCorreo
+};
