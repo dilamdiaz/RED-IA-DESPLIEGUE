@@ -432,11 +432,11 @@ const MasterclassDetalle = () => {
                     "
                 >
 
-                    <p className="text-xs text-white/50">
+                    <p className="text-sm text-white/50">
                         Hora
                     </p>
 
-                    <h4 className="mt-1 text-sm font-semibold text-white">
+                    <h4 className="mt-2 text-lg font-semibold">
                         🕒 {horaFormateada}
                     </h4>
 
