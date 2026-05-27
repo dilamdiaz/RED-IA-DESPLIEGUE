@@ -431,6 +431,18 @@ const Resources = () => {
 
                 <div className="flex-1">
 
+                  <div className="flex flex-wrap gap-2">
+
+                    <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-[11px] text-cyan-300">
+                      📄 {r.tipo}
+                    </span>
+
+                    <span className="rounded-full bg-violet-500/20 px-3 py-1 text-[11px] text-violet-300 line-clamp-1">
+                      🏷 {r.categoria}
+                    </span>
+
+                  </div>
+
                   <h2
                     className="
                       mt-4
@@ -444,21 +456,6 @@ const Resources = () => {
                   >
                     {r.titulo}
                   </h2>
-
-                </div>
-                {/* DESC */}
-                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/65">
-                  {r.descripcion}
-                </p>
-                <div className="flex flex-wrap gap-2">
-
-                  <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-[11px] text-cyan-300">
-                    📄 {r.tipo}
-                  </span>
-
-                  <span className="rounded-full bg-violet-500/20 px-3 py-1 text-[11px] text-violet-300 line-clamp-1">
-                    🏷 {r.categoria}
-                  </span>
 
                 </div>
 
@@ -479,6 +476,11 @@ const Resources = () => {
                 </div>
 
               </div>
+
+              {/* DESC */}
+              <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/65">
+                {r.descripcion}
+              </p>
 
               {/* INFO */}
               <div className="mt-4 space-y-2">
