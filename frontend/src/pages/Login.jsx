@@ -75,6 +75,14 @@ const Login = () => {
                             placeholder="Contraseña"
                         />
                     </div>
+                    
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full rounded-2xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+                    >
+                        {loading ? 'Iniciando...' : 'Iniciar sesión'}
+                    </button>
                     <div className="text-right">
 
                         <Link
@@ -85,14 +93,6 @@ const Login = () => {
                         </Link>
 
                     </div>
-
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full rounded-2xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
-                    >
-                        {loading ? 'Iniciando...' : 'Iniciar sesión'}
-                    </button>
 
                 </form>
 
