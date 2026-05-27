@@ -27,12 +27,56 @@ const ResourcePreview = ({ recurso }) => {
   // =========================
   // 📄 PDF
   // =========================
-  // =========================
-  // 📄 PDF
-  // =========================
   if (tipo.includes('pdf') || extension === 'pdf') {
 
     console.log('📄 PDF detectado');
+
+    const descargarPDF = async () => {
+
+      try {
+
+        const response = await fetch(url);
+
+        const arrayBuffer =
+          await response.arrayBuffer();
+
+        // 🔥 FORZAR PDF REAL
+        const file = new File(
+          [arrayBuffer],
+          'documento.pdf',
+          {
+            type: 'application/pdf',
+          }
+        );
+
+        const blobUrl =
+          window.URL.createObjectURL(file);
+
+        const link =
+          document.createElement('a');
+
+        link.href = blobUrl;
+
+        // 🔥 NOMBRE FINAL
+        link.download = 'documento.pdf';
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+        window.URL.revokeObjectURL(blobUrl);
+
+      } catch (error) {
+
+        console.error(
+          '❌ Error descargando PDF:',
+          error
+        );
+
+      }
+    };
 
     return (
 
@@ -40,17 +84,17 @@ const ResourcePreview = ({ recurso }) => {
 
         <div
           className="
-          flex
-          h-28
-          w-28
-          items-center
-          justify-center
-          rounded-3xl
-          border
-          border-red-500/20
-          bg-red-500/10
-          text-6xl
-        "
+            flex
+            h-28
+            w-28
+            items-center
+            justify-center
+            rounded-3xl
+            border
+            border-red-500/20
+            bg-red-500/10
+            text-6xl
+          "
         >
           📄
         </div>
@@ -61,30 +105,32 @@ const ResourcePreview = ({ recurso }) => {
             Documento PDF
           </h3>
 
-          <p className="mt-2 text-sm text-white/60">
-            Este archivo se descargara automaticamente al hacer clic en el botón. Asegúrate de tener un lector de PDF instalado para abrirlo.
+          <p className="mt-2 max-w-md text-sm text-white/60">
+            Este archivo se descargará automáticamente
+            en formato PDF al hacer clic en el botón.
           </p>
 
         </div>
 
         <button
-          onClick={() => window.open(url, '_blank')}
+          onClick={descargarPDF}
           className="
-          rounded-2xl
-          bg-cyan-500/20
-          px-6
-          py-3
-          text-cyan-300
-          transition
-          hover:bg-cyan-500/30
-        "
+            rounded-2xl
+            bg-cyan-500/20
+            px-6
+            py-3
+            text-cyan-300
+            transition
+            hover:bg-cyan-500/30
+          "
         >
-          📖 Abrir PDF
+          📥 Descargar PDF
         </button>
 
       </div>
     );
   }
+
   // =========================
   // 🖼️ IMAGEN
   // =========================
