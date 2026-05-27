@@ -1029,7 +1029,6 @@ const Foro = () => {
                 )
             }
             {/* MODAL DETALLE */}
-            {/* MODAL DETALLE */}
             {selectedPost && (
                 <div
                     className="
