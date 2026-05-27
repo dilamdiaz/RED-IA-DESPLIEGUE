@@ -209,7 +209,16 @@ const MasterclassDetalle = () => {
             </p>
         );
     }
-
+    // ======================================
+    // FORMATEAR HORA
+    // ======================================
+    const horaFormateada = masterclass.hora
+        ? new Date(`1970-01-01T${masterclass.hora}`)
+            .toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+        : 'No definida';
     // ======================================
     // ❌ ERROR
     // ======================================
@@ -260,6 +269,15 @@ const MasterclassDetalle = () => {
 
             </div>
 
+
+            {/* ====================================== */}
+            {/* TÍTULO */}
+            {/* ====================================== */}
+            <h1 className="mt-6 text-4xl font-bold">
+
+                {masterclass.titulo}
+
+            </h1>
             {/* ====================================== */}
             {/* BADGES */}
             {/* ====================================== */}
@@ -317,15 +335,6 @@ const MasterclassDetalle = () => {
             </div>
 
             {/* ====================================== */}
-            {/* TÍTULO */}
-            {/* ====================================== */}
-            <h1 className="mt-6 text-4xl font-bold">
-
-                {masterclass.titulo}
-
-            </h1>
-
-            {/* ====================================== */}
             {/* INFO CREADOR */}
             {/* ====================================== */}
             <div
@@ -356,29 +365,7 @@ const MasterclassDetalle = () => {
 
                     </div>
 
-                    <div className="flex items-center gap-2">
 
-                        <span className="text-white/50">
-                            🏫 Universidad:
-                        </span>
-
-                        <span>
-                            {masterclass.universidad}
-                        </span>
-
-                    </div>
-
-                    <div className="flex items-center gap-2">
-
-                        <span className="text-white/50">
-                            🌎 País:
-                        </span>
-
-                        <span>
-                            {masterclass.pais}
-                        </span>
-
-                    </div>
 
                 </div>
 
@@ -448,13 +435,13 @@ const MasterclassDetalle = () => {
                     "
                 >
 
-                    <p className="text-sm text-white/50">
+                    <p className="text-xs text-white/50">
                         Hora
                     </p>
 
-                    <h3 className="mt-2 text-lg font-semibold">
-                        🕒 {masterclass.hora || 'No definida'}
-                    </h3>
+                    <h4 className="mt-1 text-sm font-semibold text-white">
+                        🕒 {horaFormateada}
+                    </h4>
 
                 </div>
 
@@ -682,13 +669,13 @@ const MasterclassDetalle = () => {
 
                 ) : (
 
-    !esCreador && (
+                    !esCreador && (
 
-        yaInscrito ? (
+                        yaInscrito ? (
 
-            <button
-                disabled
-                className="
+                            <button
+                                disabled
+                                className="
                     cursor-not-allowed
                     rounded-2xl
                     bg-green-500/10
@@ -697,15 +684,15 @@ const MasterclassDetalle = () => {
                     text-green-300
                     border border-green-400/20
                 "
-            >
-                ✅ Ya estás inscrito
-            </button>
+                            >
+                                ✅ Ya estás inscrito
+                            </button>
 
-        ) : (
+                        ) : (
 
-            <button
-                disabled
-                className="
+                            <button
+                                disabled
+                                className="
                     cursor-not-allowed
                     rounded-2xl
                     bg-red-500/10
@@ -713,13 +700,13 @@ const MasterclassDetalle = () => {
                     text-sm
                     text-red-300
                 "
-            >
-                Sin cupos disponibles
-            </button>
+                            >
+                                Sin cupos disponibles
+                            </button>
 
-        )
-    )
-)}
+                        )
+                    )
+                )}
 
             </div>
 
