@@ -83,7 +83,7 @@ const Login = () => {
                     >
                         {loading ? 'Iniciando...' : 'Iniciar sesión'}
                     </button>
-                    <div className="text-right">
+                    <div className="text-center">
 
                         <Link
                             to="/forgot-password"
