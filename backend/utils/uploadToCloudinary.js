@@ -1,6 +1,9 @@
 const cloudinary = require('../config/cloudinary');
 
-const uploadToCloudinary = async (fileBuffer, mimetype) => {
+const uploadToCloudinary = async (
+  fileBuffer,
+  mimetype
+) => {
 
   return new Promise((resolve, reject) => {
 
@@ -11,14 +14,14 @@ const uploadToCloudinary = async (fileBuffer, mimetype) => {
       resourceType = 'image';
     }
 
-    // 📄 PDFs
-    else if (mimetype.includes('pdf')) {
-      resourceType = 'image';
-    }
-
     // 🎥 videos
     else if (mimetype.includes('video')) {
       resourceType = 'video';
+    }
+
+    // 📄 PDFs
+    else if (mimetype.includes('pdf')) {
+      resourceType = 'raw';
     }
 
     cloudinary.uploader.upload_stream(

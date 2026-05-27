@@ -32,19 +32,15 @@ const ResourcePreview = ({ recurso }) => {
     console.log('📄 Renderizando PDF');
 
     return (
-      <iframe
+      <embed
         src={url}
+        type="application/pdf"
         className="
         h-full
         w-full
         rounded-xl
-        border
-        border-white/20
         bg-white
       "
-        title="pdf-preview"
-        onLoad={() => console.log('✅ PDF cargado')}
-        onError={() => console.log('❌ Error PDF')}
       />
     );
   }
