@@ -1,5 +1,6 @@
 // src/App.jsx
-
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import {
   BrowserRouter,
   Routes,
@@ -81,6 +82,16 @@ const AppRoutes = () => {
           <Route
             path="/register"
             element={<Register />}
+          />
+
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
+          />
+
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPassword />}
           />
 
           {/* DASHBOARD */}

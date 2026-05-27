@@ -65,9 +65,58 @@ const validarUniversidadPais = async (id_universidad, id_pais) => {
 
   return rows.length > 0;
 };
+
+
+// ========================
+// 🔐 RECOVERY PASSWORD
+// ========================
+
+const guardarResetToken = async ({
+  email,
+  token,
+  expiration
+}) => {
+
+  await pool.query(
+    `UPDATE usuarios
+     SET reset_token = ?, reset_token_expiration = ?
+     WHERE email = ?`,
+    [token, expiration, email]
+  );
+};
+
+const obtenerUsuarioPorToken = async (token) => {
+
+  const [rows] = await pool.query(
+    `SELECT * FROM usuarios
+     WHERE reset_token = ?`,
+    [token]
+  );
+
+  return rows[0] || null;
+};
+
+const actualizarPassword = async ({
+  userId,
+  nuevaPassword
+}) => {
+
+  await pool.query(
+    `UPDATE usuarios
+     SET contraseña = ?,
+         reset_token = NULL,
+         reset_token_expiration = NULL
+     WHERE id = ?`,
+    [nuevaPassword, userId]
+  );
+};
+
 module.exports = {
   crearUsuario,
   obtenerUsuarioPorEmail,
   obtenerUsuarioPorId,
-  validarUniversidadPais
+  validarUniversidadPais,
+  guardarResetToken,
+  obtenerUsuarioPorToken,
+  actualizarPassword
 };

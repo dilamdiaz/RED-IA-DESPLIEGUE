@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const userModel = require('../models/userModel');
 const generateToken = require('../utils/generateToken');
+const crypto = require('crypto');
+const { enviarCorreo } = require('../services/emailService');
 
 // ========================
 // 🔐 AUTH
@@ -173,7 +175,121 @@ const getUniversidadesPorPais = async (req, res) => {
     return res.status(500).json({ error: 'Error al obtener universidades' });
   }
 };
+const forgotPassword = async (req, res) => {
 
+  try {
+
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        error: 'El email es obligatorio'
+      });
+    }
+
+    const usuario = await userModel.obtenerUsuarioPorEmail(email);
+
+    if (!usuario) {
+      return res.status(404).json({
+        error: 'No existe una cuenta con este email'
+      });
+    }
+
+    const token = crypto.randomBytes(32).toString('hex');
+
+    const expiration = new Date(Date.now() + 1000 * 60 * 30);
+
+    await userModel.guardarResetToken({
+      email,
+      token,
+      expiration
+    });
+
+    const resetLink =
+      `${process.env.FRONTEND_URL}/reset-password/${token}`;
+
+    await enviarCorreo({
+      to: email,
+      subject: 'Recuperación de contraseña',
+      html: `
+        <h2>Recuperación de contraseña</h2>
+
+        <p>Haz click en el siguiente enlace:</p>
+
+        <a href="${resetLink}">
+          Restablecer contraseña
+        </a>
+
+        <p>Este enlace expira en 30 minutos.</p>
+      `
+    });
+
+    return res.json({
+      message: 'Correo de recuperación enviado'
+    });
+
+  } catch (error) {
+
+    console.error('Error en forgotPassword:', error.message);
+
+    return res.status(500).json({
+      error: 'Error interno del servidor'
+    });
+  }
+};
+const resetPassword = async (req, res) => {
+
+  try {
+
+    const { token, nuevaPassword } = req.body;
+
+    if (!token || !nuevaPassword) {
+
+      return res.status(400).json({
+        error: 'Todos los campos son obligatorios'
+      });
+    }
+
+    const usuario =
+      await userModel.obtenerUsuarioPorToken(token);
+
+    if (!usuario) {
+
+      return res.status(400).json({
+        error: 'Token inválido'
+      });
+    }
+
+    const ahora = new Date();
+
+    if (ahora > usuario.reset_token_expiration) {
+
+      return res.status(400).json({
+        error: 'El token expiró'
+      });
+    }
+
+    const hashedPassword =
+      await bcrypt.hash(nuevaPassword, 10);
+
+    await userModel.actualizarPassword({
+      userId: usuario.id,
+      nuevaPassword: hashedPassword
+    });
+
+    return res.json({
+      message: 'Contraseña actualizada correctamente'
+    });
+
+  } catch (error) {
+
+    console.error('Error en resetPassword:', error.message);
+
+    return res.status(500).json({
+      error: 'Error interno del servidor'
+    });
+  }
+};
 // ========================
 // EXPORTS
 // ========================
@@ -183,5 +299,7 @@ module.exports = {
   login,
   getProfile,
   getPaises,
-  getUniversidadesPorPais
+  getUniversidadesPorPais,
+  forgotPassword,
+  resetPassword
 };
