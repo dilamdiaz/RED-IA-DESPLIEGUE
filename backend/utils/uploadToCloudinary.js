@@ -2,7 +2,8 @@ const cloudinary = require('../config/cloudinary');
 
 const uploadToCloudinary = async (
   fileBuffer,
-  mimetype
+  mimetype,
+  originalname
 ) => {
 
   return new Promise((resolve, reject) => {
@@ -24,6 +25,10 @@ const uploadToCloudinary = async (
       resourceType = 'raw';
     }
 
+    // 🔥 nombre limpio
+    const publicId =
+      originalname.replace(/\.[^/.]+$/, '');
+
     cloudinary.uploader.upload_stream(
       {
         resource_type: resourceType,
@@ -31,6 +36,12 @@ const uploadToCloudinary = async (
         type: 'upload',
 
         access_mode: 'public',
+
+        public_id: publicId,
+
+        use_filename: true,
+
+        unique_filename: false,
       },
 
       (error, result) => {

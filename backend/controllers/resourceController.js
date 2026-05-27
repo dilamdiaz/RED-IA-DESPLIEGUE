@@ -52,10 +52,10 @@ const crearRecurso = async (req, res) => {
       });
     }
 
-    // 🔥 SUBIR A CLOUDINARY
     const result = await uploadToCloudinary(
       archivo.buffer,
-      archivo.mimetype
+      archivo.mimetype,
+      archivo.originalname
     );
     const archivo_url = result.secure_url;
 
