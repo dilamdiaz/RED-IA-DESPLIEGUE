@@ -366,6 +366,13 @@ const Resources = () => {
             Robótica e IA Aplicada
           </option>
 
+          <option
+            className="text-black"
+            value="Cooperación Internacional y Universidades"
+          >
+            Cooperación Internacional y Universidades
+          </option>
+
         </select>
 
         {/* LIMPIAR */}
